@@ -1,0 +1,4 @@
+2016-12-13 13:52:55,930 - my_ssh_client.py - ERROR - 创建目录 /var/log/tty/20161213 失败，请修改/var/log/tty目录权限
+2016-12-13 13:55:22,996 - my_ssh_client.py - ERROR - 创建目录 /var/ttylog/20161213 失败，请修改/var/ttylog目录权限
+2016-12-13 13:56:55,068 - my_ssh_client.py - ERROR - 创建目录 /mylog/ttylog/20161213 失败，请修改/mylog/ttylog目录权限
+2016-12-13 13:57:26,709 - my_ssh_client.py - ERROR - 创建目录 /mylog/ttylog/20161213 失败，请修改/mylog/ttylog目录权限
