@@ -130,6 +130,7 @@ class Tty(object):
                         username=self.username,
                         password=self.passwd,
                         look_for_keys=False)
+            print '登录成功'
         except (paramiko.ssh_exception.AuthenticationException, paramiko.ssh_exception.SSHException):
             print('认证失败 Authentication Error.')
         except socket.error:

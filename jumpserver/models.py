@@ -44,8 +44,11 @@ class BindUserToHost(models.Model):
         return self.host.ip
     get_host_ip.short_description = 'IP地址'
 
+    def get_host_note(self):
+        return self.host.note
+
 class Log(models.Model):
-    log = models.OneToOneField('Auth_user')
+    log = models.ForeignKey('Auth_user')
     log_file_path = models.CharField(u'内容记录文件',max_length=256)
-    log_tiime_path = models.CharField(u'时间记录文件',max_length=256)
+    log_time_path = models.CharField(u'时间记录文件',max_length=256)
     build_time = models.DateTimeField(u'创建时间', null=True, blank=True)
