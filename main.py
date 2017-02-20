@@ -35,6 +35,7 @@ def init_log(tty_log_dir,auth_user):
     try:
         log_file = open(log_file_path + '.log', 'a')
         log_time = open(log_file_path + '.time', 'a')
+        log_cmd  = open(log_file_path + '.cmd', 'a')
     except IOError:
         logger.debug('创建tty日志文件失败, 请修改目录%s权限' % today_connect_log_dir)
         print('创建tty日志文件失败, 请修改目录%s权限' % today_connect_log_dir)
@@ -48,7 +49,7 @@ def init_log(tty_log_dir,auth_user):
     log_obj.save()
 
     log_file.write('Start at %s\r\n' % datetime.datetime.now())
-    return log_file, log_time
+    return log_file, log_time, log_cmd
 
 def check_login():
     try:
@@ -121,8 +122,8 @@ def main():
     host_obj = Host.objects.get(ip=remote_host_ip)
 
     sshtty = SshTty(remote_host_ip, obj.username, obj.passwd,host_obj.port)
-    log_file, log_time = init_log('/mylog/ttylog/',auth_user)
-    sshtty.logging(log_file,log_time)
+    log_file, log_time, log_cmd = init_log('/mylog/ttylog/',auth_user)
+    sshtty.logging(log_file,log_time,log_cmd)
     sshtty.connect()
 
 main()

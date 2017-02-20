@@ -32,6 +32,7 @@ class Tty(object):
         self.__init_screen_stream()
         self.log_file = None
         self.log_time = None
+        self.log_cmd  = None
         self.enable_logging = False
 
     def __init_screen_stream(self):
@@ -140,10 +141,11 @@ class Tty(object):
             self.client = client
             return client
 
-    def logging(self,log_file,log_time):
+    def logging(self,log_file,log_time,log_cmd):
         self.enable_logging = True
         self.log_file = log_file
         self.log_time = log_time
+        self.log_cmd  = log_cmd
 
 class SshTty(Tty):
 
@@ -250,7 +252,11 @@ class SshTty(Tty):
                                 self.vim_flag = True
                         elif not self.vim_flag:
                             self.vim_flag = False
-                            data = self.deal_command(data)[0:200]
+                            current_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
+                            cmd = self.deal_command(data)[0:200]
+                            self.log_cmd.write('%s  %s\n' % (current_time, cmd))
+                            self.log_cmd.flush()
+                            #####################################
                         data = ''
                         self.vim_data = ''
                         input_mode = False
@@ -268,6 +274,7 @@ class SshTty(Tty):
                 self.log_file.write('End time is %s' % datetime.datetime.now())
                 self.log_file.close()
                 self.log_time.close()
+                self.log_cmd.close()
     def connect(self):
         """
         Connect server.
