@@ -313,3 +313,4 @@ class SshTty(Tty):
         # Shutdown channel socket
         self.channel.close()
         client.close()
+        
